@@ -9,7 +9,7 @@
 import UIKit
 
 
-@IBDesignable class NDFillButton: UIControl {
+@IBDesignable public class NDFillButton: UIControl {
     
     let backgroundLayer = CALayer()
     let foregroundLayer = CALayer()
@@ -47,7 +47,7 @@ import UIKit
     }
     @IBInspectable var animateTextChange: Bool = true
     
-    var active: Bool = false {
+    @objc var active: Bool = false {
         didSet {
             self.setActive(active, animated: true)
         }
@@ -73,13 +73,13 @@ import UIKit
     }
     
     
-    override var frame: CGRect {
+    override public var frame: CGRect {
         didSet {
             println("Frame Updated")
         }
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         fillColor = UIColor.redColor()
         super.init(coder: aDecoder)
         
@@ -103,7 +103,7 @@ import UIKit
         self.init(frame:CGRectZero)
     }
    
-    override func prepareForInterfaceBuilder() {
+    override public func prepareForInterfaceBuilder() {
         setupLayers()
     }
     
@@ -201,26 +201,26 @@ import UIKit
         self.textLabel.sizeToFit()
     }
     
-    func setActive(active: Bool, animated: Bool) {
+    @objc public func setActive(active: Bool, animated: Bool) {
         self.animateFill(active, animated: animated)
         var animateText = animated && animateTextChange
         updateLabel(animateTextChange)
     }
     
-    override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
+    override public func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
         pressed = true
         return true
     }
     
-    override func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
+    override public func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
         return true
     }
     
-    override func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
+    override public func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
         pressed = false
     }
     
-    override func cancelTrackingWithEvent(event: UIEvent?) {
+    override public func cancelTrackingWithEvent(event: UIEvent?) {
         pressed = false
     }
 }
