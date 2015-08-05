@@ -10,9 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var button: NDFillButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        button.activeText = "Following"
+        button.normalText = "Follow"
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +23,8 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func buttonPressed(sender: AnyObject) {
+        button.toggle()
+    }
 }
 

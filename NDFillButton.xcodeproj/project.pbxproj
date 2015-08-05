@@ -13,6 +13,7 @@
 		03C3EF1D1B67FC00007CF7B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03C3EF1C1B67FC00007CF7B2 /* Images.xcassets */; };
 		03C3EF201B67FC00007CF7B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03C3EF1E1B67FC00007CF7B2 /* LaunchScreen.xib */; };
 		03C3EF2C1B67FC01007CF7B2 /* NDFillButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C3EF2B1B67FC01007CF7B2 /* NDFillButtonTests.swift */; };
+		03C3EF371B67FC7C007CF7B2 /* NDFillButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C3EF361B67FC7C007CF7B2 /* NDFillButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		03C3EF251B67FC00007CF7B2 /* NDFillButtonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NDFillButtonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03C3EF2A1B67FC01007CF7B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03C3EF2B1B67FC01007CF7B2 /* NDFillButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NDFillButtonTests.swift; sourceTree = "<group>"; };
+		03C3EF361B67FC7C007CF7B2 /* NDFillButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NDFillButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		03C3EF121B67FC00007CF7B2 /* NDFillButton */ = {
 			isa = PBXGroup;
 			children = (
+				03C3EF351B67FC46007CF7B2 /* Library */,
 				03C3EF151B67FC00007CF7B2 /* AppDelegate.swift */,
 				03C3EF171B67FC00007CF7B2 /* ViewController.swift */,
 				03C3EF191B67FC00007CF7B2 /* Main.storyboard */,
@@ -110,6 +113,14 @@
 				03C3EF2A1B67FC01007CF7B2 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		03C3EF351B67FC46007CF7B2 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				03C3EF361B67FC7C007CF7B2 /* NDFillButton.swift */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03C3EF371B67FC7C007CF7B2 /* NDFillButton.swift in Sources */,
 				03C3EF181B67FC00007CF7B2 /* ViewController.swift in Sources */,
 				03C3EF161B67FC00007CF7B2 /* AppDelegate.swift in Sources */,
 			);
