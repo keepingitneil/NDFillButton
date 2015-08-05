@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "NDFillButton"
-  s.version      = "0.0.1"
+  s.version      = '0.0.1'
   s.summary      = "Animate text in UIKit"
 
   s.description  = <<-DESC
