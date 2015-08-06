@@ -47,9 +47,11 @@ import UIKit
     }
     @IBInspectable var animateTextChange: Bool = true
     
-    @objc var active: Bool = false {
+    var animateEnabled: Bool = true
+    @objc public var active: Bool = false {
         didSet {
-            self.setActive(active, animated: true)
+            self.animateFill(active, animated: animateEnabled)
+            updateLabel(animateTextChange && animateEnabled)
         }
     }
     
@@ -107,7 +109,7 @@ import UIKit
         setupLayers()
     }
     
-    func toggle() {
+    @objc public func toggle() {
         active = !active
     }
     
@@ -202,9 +204,10 @@ import UIKit
     }
     
     @objc public func setActive(active: Bool, animated: Bool) {
-        self.animateFill(active, animated: animated)
-        var animateText = animated && animateTextChange
-        updateLabel(animateTextChange)
+        animateEnabled = animated
+        self.active = active
+        animateEnabled = true
+
     }
     
     override public func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
