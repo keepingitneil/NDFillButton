@@ -42,7 +42,7 @@
                                         <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="activeFontColor">
-                                        <color key="value" red="0.2274509804" green="0.72549019609999998" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="pressedFontColor">
                                         <color key="value" red="0.2274509804" green="0.72549019609999998" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
