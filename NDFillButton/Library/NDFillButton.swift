@@ -77,7 +77,6 @@ import UIKit
     
     override public var frame: CGRect {
         didSet {
-            println("Frame Updated")
         }
     }
     
@@ -210,6 +209,10 @@ import UIKit
 
     }
     
+}
+
+// MARK: - Touch Overrides
+extension NDFillButton {
     override public func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
         pressed = true
         return true
@@ -226,4 +229,8 @@ import UIKit
     override public func cancelTrackingWithEvent(event: UIEvent?) {
         pressed = false
     }
+}
+
+// MARK: -
+extension NDFillButton {
 }
