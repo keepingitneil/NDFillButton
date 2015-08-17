@@ -74,7 +74,6 @@ import UIKit
         }
     }
     
-    
     override public var frame: CGRect {
         didSet {
         }
@@ -111,102 +110,11 @@ import UIKit
     @objc public func toggle() {
         active = !active
     }
-    
-    func setupLayers() {
-        self.layer.addSublayer(backgroundLayer)
-        self.backgroundLayer.addSublayer(fillAnimationLayer)
-        self.layer.addSublayer(foregroundLayer)
-        
-        var midPoint = CGPoint(x: backgroundLayer.bounds.size.width / 2, y: backgroundLayer.bounds.size.height / 2)
-        fillAnimationLayer.backgroundColor = fillColor.CGColor
-        fillAnimationLayer.frame = CGRect(origin: midPoint, size: CGSize.zeroSize)
-        
-        updateLayers()
-    }
-    
-    func updateLayers() {
-        backgroundLayer.frame = CGRect(origin: CGPointZero, size: frame.size)
-        backgroundLayer.cornerRadius = cornerRadius
-        backgroundLayer.borderWidth = borderWidth
-        backgroundLayer.borderColor = borderColor.CGColor
-        backgroundLayer.masksToBounds = true
-        foregroundLayer.frame = frame
-    }
-    
-    func setupLabel() {
-        updateLabel(false)
-        self.addSubview(textLabel)
-        textLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        var centerX = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: textLabel, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
-        var centerY = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: textLabel, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0)
-        self.addConstraints([centerX, centerY])
-    }
-    
-    private func updateLabel(animated: Bool) {
-        if(!animated) {
-            self.changeLabelText()
-            return
-        }
-        UIView.animateWithDuration(0.1, animations: { () -> Void in
-            self.textLabel.transform = CGAffineTransformMakeScale(0.1, 0.1)
-        }) { (anim) -> Void in
-            self.changeLabelText()
-            UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIViewAnimationOptions.allZeros, animations: { () -> Void in
-                self.textLabel.transform = CGAffineTransformMakeScale(1, 1)
-            }, completion:nil)
-        }
-    }
-    
-    private func animateFill(active: Bool, animated: Bool) {
-        var scale = UIScreen.mainScreen().scale
-        var R = sqrt(backgroundLayer.bounds.size.height * backgroundLayer.bounds.size.height + backgroundLayer.bounds.size.width * backgroundLayer.bounds.size.width) / 2
-        var duration = 0.15 * Double(animated)
-        if active {
-            CATransaction.begin()
-            CATransaction.setAnimationDuration(duration)
-            CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
-            self.fillAnimationLayer.bounds = CGRect(origin: CGPoint.zeroPoint, size: CGSize(width: R * 2, height: R * 2))
-            self.fillAnimationLayer.cornerRadius = R
-            CATransaction.commit()
-        } else {
-            var midPoint = CGPoint(x: backgroundLayer.bounds.size.width / 2, y: backgroundLayer.bounds.size.height / 2)
-            CATransaction.begin()
-            CATransaction.setAnimationDuration(duration)
-            CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
-            self.fillAnimationLayer.bounds = CGRect(origin: midPoint, size: CGSize.zeroSize)
-            self.fillAnimationLayer.position = midPoint
-            self.fillAnimationLayer.cornerRadius = 0
-            CATransaction.commit()
-        }
-    }
-    
-    private func changeLabelText() {
-        var fontName: String
-        var fontSize: CGFloat
-        var fontText: String
-        var textColor: UIColor
-        if(self.active) {
-            fontName = self.activeFontName
-            fontSize = self.activeFontSize
-            fontText = self.activeText
-            textColor = self.activeFontColor
-        } else {
-            fontName = self.normalFontName
-            fontSize = self.normalFontSize
-            fontText = self.normalText
-            textColor = self.normalFontColor
-        }
-        self.textLabel.font = UIFont(name: fontName, size: fontSize)
-        self.textLabel.text = fontText
-        self.textLabel.textColor = textColor
-        self.textLabel.sizeToFit()
-    }
-    
+
     @objc public func setActive(active: Bool, animated: Bool) {
         animateEnabled = animated
         self.active = active
         animateEnabled = true
-
     }
     
 }
@@ -231,6 +139,105 @@ extension NDFillButton {
     }
 }
 
-// MARK: -
+// MARK: - private functions
 extension NDFillButton {
+    private func animateFill(active: Bool, animated: Bool) {
+        var scale = UIScreen.mainScreen().scale
+        var R = sqrt(backgroundLayer.bounds.size.height * backgroundLayer.bounds.size.height + backgroundLayer.bounds.size.width * backgroundLayer.bounds.size.width) / 2
+        var duration = 0.15 * Double(animated)
+        if active {
+            CATransaction.begin()
+            CATransaction.setAnimationDuration(duration)
+            CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
+            self.fillAnimationLayer.bounds = CGRect(origin: CGPoint.zeroPoint, size: CGSize(width: R * 2, height: R * 2))
+            self.fillAnimationLayer.cornerRadius = R
+            CATransaction.commit()
+        } else {
+            var midPoint = CGPoint(x: backgroundLayer.bounds.size.width / 2, y: backgroundLayer.bounds.size.height / 2)
+            CATransaction.begin()
+            CATransaction.setAnimationDuration(duration)
+            CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
+            self.fillAnimationLayer.bounds = CGRect(origin: midPoint, size: CGSize.zeroSize)
+            self.fillAnimationLayer.position = midPoint
+            self.fillAnimationLayer.cornerRadius = 0
+            CATransaction.commit()
+        }
+    }
+    
+    private func setupLayers() {
+        self.layer.addSublayer(backgroundLayer)
+        self.backgroundLayer.addSublayer(fillAnimationLayer)
+        self.layer.addSublayer(foregroundLayer)
+        
+        var midPoint = CGPoint(x: backgroundLayer.bounds.size.width / 2, y: backgroundLayer.bounds.size.height / 2)
+        fillAnimationLayer.backgroundColor = fillColor.CGColor
+        fillAnimationLayer.frame = CGRect(origin: midPoint, size: CGSize.zeroSize)
+        
+        updateLayers()
+    }
+    
+    private func updateLayers() {
+        backgroundLayer.frame = CGRect(origin: CGPointZero, size: frame.size)
+        backgroundLayer.cornerRadius = cornerRadius
+        backgroundLayer.borderWidth = borderWidth
+        backgroundLayer.borderColor = borderColor.CGColor
+        backgroundLayer.masksToBounds = true
+        foregroundLayer.frame = frame
+    }
+}
+
+// MARK: - Label
+extension NDFillButton {
+    private func setupLabel() {
+        updateLabel(false)
+        self.addSubview(textLabel)
+        textLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        var centerX = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: textLabel, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
+        var centerY = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: textLabel, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0)
+        self.addConstraints([centerX, centerY])
+    }
+    
+    private func updateLabel(animated: Bool) {
+        if(!animated) {
+            self.changeLabelText()
+            return
+        }
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+            self.textLabel.transform = CGAffineTransformMakeScale(0.1, 0.1)
+            }) { (anim) -> Void in
+                self.changeLabelText()
+                UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIViewAnimationOptions.allZeros, animations: { () -> Void in
+                    self.textLabel.transform = CGAffineTransformMakeScale(1, 1)
+                    }, completion:nil)
+        }
+    }
+    
+    private func changeLabelText() {
+        var fontName: String
+        var fontSize: CGFloat
+        var fontText: String
+        var textColor: UIColor
+        if(self.active) {
+            fontName = self.activeFontName
+            fontSize = self.activeFontSize
+            fontText = self.activeText
+            textColor = self.activeFontColor
+        } else {
+            fontName = self.normalFontName
+            fontSize = self.normalFontSize
+            fontText = self.normalText
+            textColor = self.normalFontColor
+        }
+        self.textLabel.font = UIFont(name: fontName, size: fontSize)
+        self.textLabel.text = fontText
+        self.textLabel.textColor = textColor
+        self.textLabel.sizeToFit()
+    }
+}
+
+public extension NDFillButton {
+    @objc public override func sizeThatFits(size: CGSize) -> CGSize {
+        var labelSize = textLabel.sizeThatFits(size)
+        return CGSize(width: labelSize.width + 4, height: labelSize.height)
+    }
 }
