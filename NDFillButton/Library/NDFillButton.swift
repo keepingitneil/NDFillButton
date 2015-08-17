@@ -139,7 +139,7 @@ extension NDFillButton {
     }
 }
 
-// MARK: - private functions
+// MARK: - layer
 extension NDFillButton {
     private func animateFill(active: Bool, animated: Bool) {
         var scale = UIScreen.mainScreen().scale
