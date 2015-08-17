@@ -49,7 +49,7 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="string" keyPath="activeText" value="Following"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="normalText" value="Follow"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="animateTextChange" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="animateTextChange" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sgk-4z-p4p"/>
