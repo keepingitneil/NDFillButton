@@ -74,10 +74,7 @@ import UIKit
         }
     }
     
-    override public var frame: CGRect {
-        didSet {
-        }
-    }
+
     
     required public init(coder aDecoder: NSCoder) {
         fillColor = UIColor.redColor()
@@ -183,6 +180,12 @@ extension NDFillButton {
         backgroundLayer.borderColor = borderColor.CGColor
         backgroundLayer.masksToBounds = true
         foregroundLayer.frame = frame
+        setActive(active, animated: false)
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        updateLayers()
     }
 }
 
