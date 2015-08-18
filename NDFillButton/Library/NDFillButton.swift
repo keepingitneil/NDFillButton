@@ -35,12 +35,12 @@ import UIKit
     @IBInspectable var normalFontColor: UIColor = UIColor.blackColor()
     @IBInspectable var normalFontSize: CGFloat = 14.0
     var textLabel: UILabel = UILabel()
-    @IBInspectable var activeText: String = "Active" {
+    @IBInspectable public var activeText: String = "Active" {
         didSet {
             setupLabel()
         }
     }
-    @IBInspectable var normalText: String = "Inactive" {
+    @IBInspectable public var normalText: String = "Inactive" {
         didSet {
             setupLabel()
         }
