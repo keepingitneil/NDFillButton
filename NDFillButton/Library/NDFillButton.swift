@@ -183,8 +183,8 @@ extension NDFillButton {
         setActive(active, animated: false)
     }
     
-    public override func layoutSubviews() {
-        super.layoutSubviews()
+    public override func layoutSublayersOfLayer(layer: CALayer!) {
+        super.layoutSublayersOfLayer(layer)
         updateLayers()
     }
 }
