@@ -14,26 +14,26 @@ import UIKit
     let backgroundLayer = CALayer()
     let foregroundLayer = CALayer()
     let fillAnimationLayer = CALayer()
-    @IBInspectable var fillColor: UIColor {
+    @objc @IBInspectable public var fillColor: UIColor {
         didSet {
             fillAnimationLayer.backgroundColor = fillColor.CGColor
         }
     }
-    @IBInspectable var emptyColor: UIColor = UIColor.clearColor()
-    @IBInspectable var borderColor: UIColor = UIColor.redColor()
-    @IBInspectable var cornerRadius: CGFloat = 5.0 {
+    @objc @IBInspectable public var emptyColor: UIColor = UIColor.clearColor()
+    @objc @IBInspectable public var borderColor: UIColor = UIColor.redColor()
+    @objc @IBInspectable public var cornerRadius: CGFloat = 5.0 {
         didSet {
             updateLayers()
         }
     }
-    @IBInspectable var pressedCornerRadius: CGFloat = 5.0
-    @IBInspectable var borderWidth: CGFloat = 2
-    @IBInspectable var activeFontName: String = "Helvetica"
-    @IBInspectable var activeFontColor: UIColor = UIColor.blackColor()
-    @IBInspectable var activeFontSize: CGFloat = 14.0
-    @IBInspectable var normalFontName: String = "Helvetica"
-    @IBInspectable var normalFontColor: UIColor = UIColor.blackColor()
-    @IBInspectable var normalFontSize: CGFloat = 14.0
+    @objc @IBInspectable public var pressedCornerRadius: CGFloat = 5.0
+    @objc @IBInspectable public var borderWidth: CGFloat = 2
+    @objc @IBInspectable public var activeFontName: String = "Helvetica"
+    @objc @IBInspectable public var activeFontColor: UIColor = UIColor.blackColor()
+    @objc @IBInspectable public var activeFontSize: CGFloat = 14.0
+    @objc @IBInspectable public var normalFontName: String = "Helvetica"
+    @objc @IBInspectable public var normalFontColor: UIColor = UIColor.blackColor()
+    @objc @IBInspectable public var normalFontSize: CGFloat = 14.0
     var textLabel: UILabel = UILabel()
     @IBInspectable public var activeText: String = "Active" {
         didSet {
