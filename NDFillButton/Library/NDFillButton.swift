@@ -140,7 +140,7 @@ extension NDFillButton {
 extension NDFillButton {
     private func animateFill(active: Bool, animated: Bool) {
         var scale = UIScreen.mainScreen().scale
-        var R = sqrt(backgroundLayer.bounds.size.height * backgroundLayer.bounds.size.height + backgroundLayer.bounds.size.width * backgroundLayer.bounds.size.width) / 2
+        var R = sqrt(backgroundLayer.bounds.size.height * backgroundLayer.bounds.size.height + backgroundLayer.bounds.size.width * backgroundLayer.bounds.size.width) / 2 + 3
         var duration = 0.15 * Double(animated)
         if active {
             CATransaction.begin()
