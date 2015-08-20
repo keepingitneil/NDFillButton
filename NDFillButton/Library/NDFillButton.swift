@@ -20,27 +20,56 @@ import UIKit
         }
     }
     @objc @IBInspectable public var emptyColor: UIColor = UIColor.clearColor()
-    @objc @IBInspectable public var borderColor: UIColor = UIColor.redColor()
+    @objc @IBInspectable public var normalBorderColor: UIColor = UIColor.redColor() {
+        didSet {
+            updateLayers()
+        }
+    }
+    @objc @IBInspectable public var activeBorderColor: UIColor = UIColor.blueColor() {
+        didSet {
+            updateLayers()
+        }
+    }
     @objc @IBInspectable public var cornerRadius: CGFloat = 5.0 {
         didSet {
             updateLayers()
         }
     }
     @objc @IBInspectable public var pressedCornerRadius: CGFloat = 5.0
-    @objc @IBInspectable public var borderWidth: CGFloat = 2
-    @objc @IBInspectable public var activeFontName: String = "Helvetica"
-    @objc @IBInspectable public var activeFontColor: UIColor = UIColor.blackColor()
-    @objc @IBInspectable public var activeFontSize: CGFloat = 14.0
-    @objc @IBInspectable public var normalFontName: String = "Helvetica"
-    @objc @IBInspectable public var normalFontColor: UIColor = UIColor.blackColor()
-    @objc @IBInspectable public var normalFontSize: CGFloat = 14.0
-    var textLabel: UILabel = UILabel()
-    @IBInspectable public var activeText: String = "Active" {
+    @objc @IBInspectable public var borderWidth: CGFloat = 2 {
+        didSet {
+            updateLayers()
+        }
+    }
+    @objc @IBInspectable public var activeFontName: String = "Helvetica" {
         didSet {
             setupLabel()
         }
     }
-    @IBInspectable public var normalText: String = "Inactive" {
+    @objc @IBInspectable public var activeFontColor: UIColor = UIColor.blackColor() {
+        didSet {
+            setupLabel()
+        }
+    }
+    @objc @IBInspectable public var activeFontSize: CGFloat = 14.0 {
+        didSet {
+            setupLabel()
+        }
+    }
+    @objc @IBInspectable public var normalFontName: String = "Helvetica" {
+        didSet {
+            setupLabel()
+        }
+    }
+    @objc @IBInspectable public var normalFontColor: UIColor = UIColor.blackColor()
+    @objc @IBInspectable public var normalFontSize: CGFloat = 14.0
+    @IBInspectable var textLabel: UILabel = UILabel()
+    @objc @IBInspectable public var activeText: String = "Active" {
+        didSet {
+            setupLabel()
+        }
+    }
+    @objc public var normalText: String = "Inactive" {
         didSet {
             setupLabel()
         }
@@ -102,6 +131,7 @@ import UIKit
    
     override public func prepareForInterfaceBuilder() {
         setupLayers()
+        setupLabel()
     }
     
     @objc public func toggle() {
@@ -177,7 +207,11 @@ extension NDFillButton {
         backgroundLayer.frame = CGRect(origin: CGPointZero, size: frame.size)
         backgroundLayer.cornerRadius = cornerRadius
         backgroundLayer.borderWidth = borderWidth
-        backgroundLayer.borderColor = borderColor.CGColor
+        if active {
+           backgroundLayer.borderColor = activeBorderColor.CGColor
+        } else {
+            backgroundLayer.borderColor = normalBorderColor.CGColor
+        }
         backgroundLayer.masksToBounds = true
         foregroundLayer.frame = frame
         setActive(active, animated: false)

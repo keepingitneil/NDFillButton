@@ -50,6 +50,13 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="activeText" value="Following"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="normalText" value="Follow"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="animateTextChange" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="normalBorderColor">
+                                        <color key="value" red="0.65490196079999996" green="0.33725490200000002" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="activeBorderColor">
+                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="active" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sgk-4z-p4p"/>
