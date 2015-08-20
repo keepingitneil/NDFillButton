@@ -43,22 +43,22 @@ import UIKit
     }
     @objc @IBInspectable public var activeFontName: String = "Helvetica" {
         didSet {
-            setupLabel()
+            updateLabel(false)
         }
     }
     @objc @IBInspectable public var activeFontColor: UIColor = UIColor.blackColor() {
         didSet {
-            setupLabel()
+            updateLabel(false)
         }
     }
     @objc @IBInspectable public var activeFontSize: CGFloat = 14.0 {
         didSet {
-            setupLabel()
+            updateLabel(false)
         }
     }
     @objc @IBInspectable public var normalFontName: String = "Helvetica" {
         didSet {
-            setupLabel()
+            updateLabel(false)
         }
     }
     @objc @IBInspectable public var normalFontColor: UIColor = UIColor.blackColor()
@@ -66,12 +66,12 @@ import UIKit
     @IBInspectable var textLabel: UILabel = UILabel()
     @objc @IBInspectable public var activeText: String = "Active" {
         didSet {
-            setupLabel()
+            updateLabel(false)
         }
     }
-    @objc public var normalText: String = "Inactive" {
+    @objc @IBInspectable public var normalText: String = "Inactive" {
         didSet {
-            setupLabel()
+            updateLabel(false)
         }
     }
     @IBInspectable var animateTextChange: Bool = true
@@ -132,6 +132,8 @@ import UIKit
     override public func prepareForInterfaceBuilder() {
         setupLayers()
         setupLabel()
+        updateLayers()
+        updateLabel(false)
     }
     
     @objc public func toggle() {
