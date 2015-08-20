@@ -169,18 +169,19 @@ extension NDFillButton {
 // MARK: - layer
 extension NDFillButton {
     private func animateFill(active: Bool, animated: Bool) {
-        var scale = UIScreen.mainScreen().scale
-        var R = sqrt(backgroundLayer.bounds.size.height * backgroundLayer.bounds.size.height + backgroundLayer.bounds.size.width * backgroundLayer.bounds.size.width) / 2 + 3
-        var duration = 0.15 * Double(animated)
+        let scale = UIScreen.mainScreen().scale
+        let R = sqrt(backgroundLayer.bounds.size.height * backgroundLayer.bounds.size.height + backgroundLayer.bounds.size.width * backgroundLayer.bounds.size.width) / 2 + 3
+        let duration = 0.15 * Double(animated)
+        let midPoint = CGPoint(x: backgroundLayer.bounds.size.width / 2, y: backgroundLayer.bounds.size.height / 2)
         if active {
             CATransaction.begin()
             CATransaction.setAnimationDuration(duration)
             CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
             self.fillAnimationLayer.bounds = CGRect(origin: CGPoint.zeroPoint, size: CGSize(width: R * 2, height: R * 2))
             self.fillAnimationLayer.cornerRadius = R
+            self.fillAnimationLayer.position = midPoint
             CATransaction.commit()
         } else {
-            var midPoint = CGPoint(x: backgroundLayer.bounds.size.width / 2, y: backgroundLayer.bounds.size.height / 2)
             CATransaction.begin()
             CATransaction.setAnimationDuration(duration)
             CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
