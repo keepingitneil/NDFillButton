@@ -102,9 +102,7 @@ import UIKit
             }
         }
     }
-    
 
-    
     required public init(coder aDecoder: NSCoder) {
         fillColor = UIColor.redColor()
         super.init(coder: aDecoder)
