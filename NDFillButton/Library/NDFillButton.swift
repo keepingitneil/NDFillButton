@@ -130,8 +130,7 @@ import UIKit
     }
    
     override public func prepareForInterfaceBuilder() {
-        setupLayers()
-        setupLabel()
+        super.prepareForInterfaceBuilder()
         updateLayers()
         updateLabel(false)
     }
@@ -176,6 +175,7 @@ extension NDFillButton {
         let duration = 0.15 * Double(animated)
         let midPoint = CGPoint(x: backgroundLayer.bounds.size.width / 2, y: backgroundLayer.bounds.size.height / 2)
         if active {
+            backgroundLayer.borderColor = activeBorderColor.CGColor
             CATransaction.begin()
             CATransaction.setAnimationDuration(duration)
             CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
@@ -184,6 +184,7 @@ extension NDFillButton {
             self.fillAnimationLayer.position = midPoint
             CATransaction.commit()
         } else {
+            backgroundLayer.borderColor = normalBorderColor.CGColor
             CATransaction.begin()
             CATransaction.setAnimationDuration(duration)
             CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
