@@ -103,7 +103,7 @@ import UIKit
         }
     }
 
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fillColor = UIColor.redColor()
         super.init(coder: aDecoder)
         
@@ -147,16 +147,16 @@ import UIKit
 
 // MARK: - Touch Overrides
 extension NDFillButton {
-    override public func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
+    override public func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
         pressed = true
         return true
     }
     
-    override public func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
+    override public func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
         return true
     }
     
-    override public func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
+    override public func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
         pressed = false
     }
     
@@ -168,7 +168,6 @@ extension NDFillButton {
 // MARK: - layer
 extension NDFillButton {
     private func animateFill(active: Bool, animated: Bool) {
-        let scale = UIScreen.mainScreen().scale
         let R = sqrt(backgroundLayer.bounds.size.height * backgroundLayer.bounds.size.height + backgroundLayer.bounds.size.width * backgroundLayer.bounds.size.width) / 2 + 3
         let duration = 0.15 * Double(animated)
         let midPoint = CGPoint(x: backgroundLayer.bounds.size.width / 2, y: backgroundLayer.bounds.size.height / 2)
@@ -177,7 +176,7 @@ extension NDFillButton {
             CATransaction.begin()
             CATransaction.setAnimationDuration(duration)
             CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
-            self.fillAnimationLayer.bounds = CGRect(origin: CGPoint.zeroPoint, size: CGSize(width: R * 2, height: R * 2))
+            self.fillAnimationLayer.bounds = CGRect(origin: CGPoint.zero, size: CGSize(width: R * 2, height: R * 2))
             self.fillAnimationLayer.cornerRadius = R
             self.fillAnimationLayer.position = midPoint
             CATransaction.commit()
@@ -186,7 +185,7 @@ extension NDFillButton {
             CATransaction.begin()
             CATransaction.setAnimationDuration(duration)
             CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
-            self.fillAnimationLayer.bounds = CGRect(origin: midPoint, size: CGSize.zeroSize)
+            self.fillAnimationLayer.bounds = CGRect(origin: midPoint, size: CGSize.zero)
             self.fillAnimationLayer.position = midPoint
             self.fillAnimationLayer.cornerRadius = 0
             CATransaction.commit()
@@ -198,9 +197,9 @@ extension NDFillButton {
         self.backgroundLayer.addSublayer(fillAnimationLayer)
         self.layer.addSublayer(foregroundLayer)
         
-        var midPoint = CGPoint(x: backgroundLayer.bounds.size.width / 2, y: backgroundLayer.bounds.size.height / 2)
+        let midPoint = CGPoint(x: backgroundLayer.bounds.size.width / 2, y: backgroundLayer.bounds.size.height / 2)
         fillAnimationLayer.backgroundColor = fillColor.CGColor
-        fillAnimationLayer.frame = CGRect(origin: midPoint, size: CGSize.zeroSize)
+        fillAnimationLayer.frame = CGRect(origin: midPoint, size: CGSize.zero)
         
         updateLayers()
     }
@@ -219,7 +218,7 @@ extension NDFillButton {
         setActive(active, animated: false)
     }
     
-    public override func layoutSublayersOfLayer(layer: CALayer!) {
+    public override func layoutSublayersOfLayer(layer: CALayer) {
         super.layoutSublayersOfLayer(layer)
         updateLayers()
     }
@@ -230,9 +229,9 @@ extension NDFillButton {
     private func setupLabel() {
         updateLabel(false)
         self.addSubview(textLabel)
-        textLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        var centerX = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: textLabel, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
-        var centerY = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: textLabel, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0)
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        let centerX = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: textLabel, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
+        let centerY = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: textLabel, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0)
         self.addConstraints([centerX, centerY])
     }
     
@@ -245,7 +244,7 @@ extension NDFillButton {
             self.textLabel.transform = CGAffineTransformMakeScale(0.1, 0.1)
             }) { (anim) -> Void in
                 self.changeLabelText()
-                UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIViewAnimationOptions.allZeros, animations: { () -> Void in
+                UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIViewAnimationOptions(), animations: { () -> Void in
                     self.textLabel.transform = CGAffineTransformMakeScale(1, 1)
                     }, completion:nil)
         }
@@ -276,7 +275,7 @@ extension NDFillButton {
 
 public extension NDFillButton {
     @objc public override func sizeThatFits(size: CGSize) -> CGSize {
-        var labelSize = textLabel.sizeThatFits(size)
+        let labelSize = textLabel.sizeThatFits(size)
         return CGSize(width: labelSize.width + 4, height: labelSize.height)
     }
 }
