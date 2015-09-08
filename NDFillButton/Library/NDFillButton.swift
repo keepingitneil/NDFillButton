@@ -103,7 +103,7 @@ import UIKit
         }
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         fillColor = UIColor.redColor()
         super.init(coder: aDecoder)
         
@@ -176,7 +176,7 @@ extension NDFillButton {
             CATransaction.begin()
             CATransaction.setAnimationDuration(duration)
             CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
-            self.fillAnimationLayer.bounds = CGRect(origin: CGPoint.zero, size: CGSize(width: R * 2, height: R * 2))
+            self.fillAnimationLayer.bounds = CGRect(origin: CGPointZero, size: CGSize(width: R * 2, height: R * 2))
             self.fillAnimationLayer.cornerRadius = R
             self.fillAnimationLayer.position = midPoint
             CATransaction.commit()
@@ -185,7 +185,7 @@ extension NDFillButton {
             CATransaction.begin()
             CATransaction.setAnimationDuration(duration)
             CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
-            self.fillAnimationLayer.bounds = CGRect(origin: midPoint, size: CGSize.zero)
+            self.fillAnimationLayer.bounds = CGRect(origin: midPoint, size: CGSizeZero)
             self.fillAnimationLayer.position = midPoint
             self.fillAnimationLayer.cornerRadius = 0
             CATransaction.commit()
@@ -199,7 +199,7 @@ extension NDFillButton {
         
         let midPoint = CGPoint(x: backgroundLayer.bounds.size.width / 2, y: backgroundLayer.bounds.size.height / 2)
         fillAnimationLayer.backgroundColor = fillColor.CGColor
-        fillAnimationLayer.frame = CGRect(origin: midPoint, size: CGSize.zero)
+        fillAnimationLayer.frame = CGRect(origin: midPoint, size: CGSizeZero)
         
         updateLayers()
     }
@@ -229,7 +229,7 @@ extension NDFillButton {
     private func setupLabel() {
         updateLabel(false)
         self.addSubview(textLabel)
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         let centerX = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: textLabel, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
         let centerY = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: textLabel, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0)
         self.addConstraints([centerX, centerY])
