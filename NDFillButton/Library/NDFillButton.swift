@@ -103,7 +103,7 @@ import UIKit
         }
     }
 
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fillColor = UIColor.redColor()
         super.init(coder: aDecoder)
         
@@ -229,7 +229,7 @@ extension NDFillButton {
     private func setupLabel() {
         updateLabel(false)
         self.addSubview(textLabel)
-        textLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
         let centerX = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: textLabel, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
         let centerY = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: textLabel, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0)
         self.addConstraints([centerX, centerY])
